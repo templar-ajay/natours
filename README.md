@@ -90,3 +90,161 @@ text-align: center;
   animation: moveInLeft 0.2s ease-out 0.75 backwards;
 }
 ```
+
+## multiple properties of an animation
+
+```css
+#el {
+  transform: scaleX(1.2) scaleY(1.6) rotate(45deg);
+}
+```
+
+# How CSS Works
+
+## **Importance > Specificity > Source Order**
+
+### Importance Order
+
+1. User !important declarations
+2. Author !important declarations
+3. Author declarations
+4. User declarations
+5. Default browser declarations
+
+### Specificity Order
+
+1. Inline styles
+2. IDs
+3. Classes, pseudo-classes, attribute
+4. Elements, pseudo-elements
+
+### Source Order
+
+The last declaration in the code will apply if the Importance and specificity of the declaration are the same.
+
+## Key points
+
+- directly targeted elements have higher precedence than inherited styles
+
+  ```html
+  <div id="parent">
+    <h1>Heading</h1>
+  </div>
+  ```
+
+  ```css
+  * {
+    color: red; /* specificity (0-0-0) */
+  }
+
+  #parent {
+    color: green;
+  }
+
+  h1 {
+    color: purple; /* purple wins */
+  }
+  ```
+
+- !important needs to be avoided as much as possible.
+
+- these pseudo-classes themselves don't add any weight to the specificity of the selector.
+
+  ```css
+  :not() /*negation pseudo-class */
+  :is() /*matches any pseudo-class */
+  :has() /*relational pseudo-class */
+  ```
+
+  but the specifiers present inside them do add their own weight to the specificity of the selector.
+
+- :where() pseudo-class makes the specificity of the specifiers within it to be (0-0-0);
+  ```css
+  :where(#id .class div) a ; /* (0-0-0) + (0-0-1) = (0-0-1)
+  ```
+
+## Good Practices to declare selectors
+
+### with or without adding specificity
+
+```css
+#myContent h1 {
+  color: green; /* 1-0-1 */
+}
+
+/* reducing id specificity */
+[id="myContent"] h1 {
+  color: yellow; /* 0-1-1 */
+}
+:where(#myContent) h1 {
+  color: blue; /* 0-0-1 */
+}
+
+/* increasing specificity - NOTE: use sparingly*/
+#myId#myId#myId span {
+  /* 3-0-1 */
+}
+.myClass.myClass.myClass span {
+  /* 0-3-1 */
+}
+:not(#fakeID#fakeId#fakeID) span {
+  /* 3-0-1 */
+}
+:is(#fakeID#fakeId#fakeID, span) {
+  /* 3-0-0 */
+}
+```
+
+# How is CSS Parsed?
+
+## Processing
+
+```css
+1 rem = 1 \* 16px; /* 16px is browser default font-size of root element */
+```
+
+1. % (fonts): x% \* parent's computed font-size
+2. % (length) : x% \* parent's computed width
+3. em(font) : x\* parent computed font-size
+4. em(length): x\* current element computed font-size
+5. rem: x\* root computed font-size
+6. vh: x\*1% of viewport height
+7. vw: x \* 1% of viewport weight
+
+### Key Points -
+
+- each property has initial value, used if nothing is declared (or inherited).
+- Browsers specify a root-font-size for each page(usually 16px).
+- Percentages and relative values are always converted to pixels.
+- Percentages are measured relative to their parent's font-size, if used to specify font-size.
+- Percentages are measured relative to their parent's **width**, if used to specify lengths.
+- **em** are measured relative to their parent **font-size**,if used to specify **font-size**.
+- **em** are measured relative to their current **font-size** if used to specify **lengths**.
+- **rem** are always measured relative to the **document's root** **font-size**.
+- vh and vw are simply percentage measurements of the viewport height and width respectively.
+
+## Inheritance
+
+```css
+.parent {
+  font-size: 20px;
+  line-height: 150%;
+  /* the line-height computed value will be 150/100 * 20px = 30px; */
+}
+
+.child {
+  font-size: 25px;
+  /* inherited line height will be 30px*/
+  /* NOT 150% */
+}
+```
+
+### Key Points
+
+- Inherited value of line-height of child element is the computed value of parent element(20\*1.5=30px)
+- Inheritance passes the values for some specific properties from parents to children - more maintainable code.
+- Properties related to text are inherited: font-family, font-size, color, etc.
+- The **computed value** of a property is **inherited**, _not the declared value_.
+- Inheritance of a property only works if no one declares a value for that property.
+- The **inherit** keyword forces inheritance of a certain property;
+- The **initial** keyword resets a property to its initial value.
