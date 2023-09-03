@@ -248,3 +248,88 @@ The last declaration in the code will apply if the Importance and specificity of
 - Inheritance of a property only works if no one declares a value for that property.
 - The **inherit** keyword forces inheritance of a certain property;
 - The **initial** keyword resets a property to its initial value.
+
+# Visual Formatting Model
+
+## Box Model
+
+- content area width\*height (text content)
+- fill area width \* height + padding (background images, background color)
+
+- `box-sizing: border-box` height and width include the padding of the box
+
+## Box Types
+
+### Block-level boxes
+
+- elements formatted visually as blocks.
+- 100% of parents width.
+- vertically one after another.
+
+```css
+display: block;
+display: flex;
+display: list-item;
+display: table;
+```
+
+### Inline boxes
+
+- Content is distributed in lines.
+- Occupies only content space.
+- No line-breaks
+- **No heights and widths**.
+- **paddings and margins only horizontal(left and right)**
+
+```css
+display: inline;
+```
+
+### Inline block boxes
+
+- A mix of block and inline.
+- Occupies only content space.
+- No line-breaks.
+
+```css
+display: inline-block;
+```
+
+## Positioning Schemes
+
+### Normal Flow
+
+- default positioning scheme.
+- elements laid out according to their source order.
+
+```css
+position: relative;
+/* default position for every element is relative */
+```
+
+### Floats
+
+- Element is removed from normal flow.
+- Text and inline elements will wrap around the floated element.
+- the container will not adjust it's height according to the floated element. to fix this we use clear-fixes.
+
+```css
+float: left;
+float: right;
+```
+
+### Absolute Positioning
+
+- Element is removed from normal flow
+- No impact on surrounding content or elements.
+- we use top, bottom, left and right ot offset the element from it's relatively positioned container.
+
+```css
+position: absolute; /* positions wrt to it's position:relative ancestor */
+position: fixed; /* positions wrt to the viewport of screen regardless of scroll */
+```
+
+### Stacking Contexts
+
+- z-index creates stacking contexts.
+- also other things like opacity value other than 1, transform , filter and other properties cause stacking context.
