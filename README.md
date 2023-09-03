@@ -304,7 +304,8 @@ display: inline-block;
 
 ```css
 position: relative;
-/* default position for every element is relative */
+/* top, right left and bottom properties can still be used on relative to displace
+ it from its position from normal document flow */
 ```
 
 ### Floats
