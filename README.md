@@ -334,3 +334,222 @@ position: fixed; /* positions wrt to the viewport of screen regardless of scroll
 
 - z-index creates stacking contexts.
 - also other things like opacity value other than 1, transform , filter and other properties cause stacking context.
+
+# Think Build Architect
+
+## Think
+
+- Clean
+- Modular
+- Reusable
+- Ready for growth
+
+layout - naming classes - good folders structure
+
+### Component Driven Design
+
+- **Modular building blocks** that make up interfaces.
+- Held together by the **layout** of the page.
+- **Re-usable** across the project, and between different projects.
+- **Independent**, allowing us to use them anywhere on the page.
+
+## Build
+
+### B--E\_\_M
+
+- Block Element Modifier
+- BLOCK - standalone component that is meaningful on its own.
+- ELEMENT - part of block that has no standalone meaning.
+- MODIFIER - a different version of a block or an element.
+
+```css
+.block {
+}
+.block--element {
+}
+.block--element__modifier {
+}
+```
+
+## Architect
+
+The seven folders
+
+1. base/ _basic project definitions_
+2. components/ _a file for every component_
+3. layout/ _overall layout of the project_
+4. pages/ _styles for specific pages of the project_
+5. themes/ _if the project has different visual themes_
+6. abstracts/ _the code which doesn't output any css, variables and mixins_
+7. vendors/ _all the third party css_
+
+# SASS
+
+- **Variables**: for reusable values such as colors, font-sizes, spacing, etc.
+- **Nesting**: to nest selectors inside of one another, allowing us to write less code.
+- **Operators**: mathematical operators right inside CSS.
+- **Partials and imports**: write different files and importing them all into one single file.
+- **Mixins**: to write reusable pieces of CSS code.
+- **Functions**: similar to mixins, with the difference that they produce a value that can be used.
+- **Extends**: to make different selectors inherit declarations that are common to all of them.
+- **Control Directives**: for writing complex code using conditionals and loops (not covered in this course).
+
+## Making a navbar with SCSS syntax (Sassy CSS);
+
+```html
+<nav>
+  <ul class="navigation">
+    <li><a href="#">About Us</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="buttons">
+    <a class="btn-main" href="#">Sign Up</a>
+    <a class="btn-hot" href="#">Get a quote</a>
+  </div>
+</nav>
+```
+
+```scss
+* {
+  margin: 0;
+  padding: 0;
+}
+
+$color-primary: #f9ed69; // yellow
+$color-secondary: #f08a5d; //orange
+$color-tertiary: #b83b5e; //pink
+$color-text-dark: #333;
+$color-text-light: #fff;
+
+$width-button: 150px;
+
+nav {
+  margin: 30px;
+  background-color: $color-primary;
+
+  &::after {
+    //clearfix
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+.navigation {
+  list-style: none;
+  float: left;
+
+  li {
+    display: inline-block;
+    margin-left: 30px;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    a:link {
+      text-decoration: none;
+      text-transform: uppercase;
+      color: $color-text-dark;
+    }
+  }
+}
+
+.buttons {
+  float: right;
+
+  .btn-main:link,
+  .btn-hot:link {
+    padding: 10px;
+    display: inline-block;
+    border-radius: 100px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: $width-button;
+    color: $color-text-light;
+  }
+
+  .btn-main {
+    &:link {
+      background-color: $color-secondary;
+    }
+    &:hover {
+      background-color: darken($color-secondary, 15%);
+    }
+  }
+
+  .btn-hot {
+    &:link {
+      background-color: $color-tertiary;
+    }
+    &:hover {
+      background-color: lighten($color-tertiary, 5%);
+    }
+  }
+}
+```
+
+compiled css
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  margin: 30px;
+  background-color: #f9ed69;
+}
+nav::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.navigation {
+  list-style: none;
+  float: left;
+}
+.navigation li {
+  display: inline-block;
+  margin-left: 30px;
+}
+.navigation li:first-child {
+  margin: 0;
+}
+.navigation li a:link {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.buttons {
+  float: right;
+}
+.buttons .btn-main:link,
+.buttons .btn-hot:link {
+  padding: 10px;
+  display: inline-block;
+  border-radius: 100px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 150px;
+  color: #fff;
+}
+.buttons .btn-main:link {
+  background-color: #f08a5d;
+}
+.buttons .btn-main:hover {
+  background-color: #ea5717;
+}
+.buttons .btn-hot:link {
+  background-color: #b83b5e;
+}
+.buttons .btn-hot:hover {
+  background-color: #c4486b;
+}
+```
