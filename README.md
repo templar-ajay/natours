@@ -2,6 +2,19 @@
 
 A website development attempt to learn CSS
 
+# Run Locally
+
+```bash
+npm i
+
+# either
+npm run dev
+
+# or
+# npm run compile:sass
+# npm run live-reload
+```
+
 # TakeAways
 
 ## background image with gradient on top
