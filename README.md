@@ -396,6 +396,8 @@ The seven folders
 
 ## Making a navbar with SCSS syntax (Sassy CSS);
 
+[click here to view the codepen](https://codepen.io/templar-command0/pen/wvRgzwa)
+
 ```html
 <nav>
   <ul class="navigation">
@@ -424,16 +426,30 @@ $color-text-light: #fff;
 
 $width-button: 150px;
 
-nav {
-  margin: 30px;
-  background-color: $color-primary;
-
+@mixin clearfix {
   &::after {
     //clearfix
     content: "";
     clear: both;
     display: table;
   }
+}
+
+@mixin style-link-text($color) {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $color;
+}
+
+@function divide($a, $b) {
+  @return $a/$b;
+}
+
+nav {
+  margin: divide(60, 2) * 1px; // 30px;
+  background-color: $color-primary;
+
+  @include clearfix;
 }
 
 .navigation {
@@ -449,30 +465,27 @@ nav {
     }
 
     a:link {
-      text-decoration: none;
-      text-transform: uppercase;
-      color: $color-text-dark;
+      @include style-link-text($color-text-dark);
     }
   }
+}
+
+%btn-placeholder {
+  padding: 10px;
+  display: inline-block;
+  border-radius: 100px;
+  text-align: center;
+  width: $width-button;
+
+  @include style-link-text($color-text-light);
 }
 
 .buttons {
   float: right;
 
-  .btn-main:link,
-  .btn-hot:link {
-    padding: 10px;
-    display: inline-block;
-    border-radius: 100px;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    width: $width-button;
-    color: $color-text-light;
-  }
-
   .btn-main {
     &:link {
+      @extend %btn-placeholder;
       background-color: $color-secondary;
     }
     &:hover {
@@ -482,6 +495,7 @@ nav {
 
   .btn-hot {
     &:link {
+      @extend %btn-placeholder;
       background-color: $color-tertiary;
     }
     &:hover {
@@ -526,19 +540,20 @@ nav::after {
   color: #333;
 }
 
-.buttons {
-  float: right;
-}
-.buttons .btn-main:link,
-.buttons .btn-hot:link {
+.buttons .btn-hot:link,
+.buttons .btn-main:link {
   padding: 10px;
   display: inline-block;
   border-radius: 100px;
   text-align: center;
+  width: 150px;
   text-decoration: none;
   text-transform: uppercase;
-  width: 150px;
   color: #fff;
+}
+
+.buttons {
+  float: right;
 }
 .buttons .btn-main:link {
   background-color: #f08a5d;
@@ -551,5 +566,54 @@ nav::after {
 }
 .buttons .btn-hot:hover {
   background-color: #c4486b;
+}
+```
+
+### Note
+
+**the difference between extend and mixin**
+
+```scss
+// scss
+
+$color-text-dark: #1a1a1a;
+
+@mixin style-link-text($color) {
+  text-transform: uppercase;
+  color: $color;
+}
+
+%remove-underline {
+  text-decoration: none;
+}
+
+a:link {
+  extend %remove-underline;
+  @include style-link-text($color-text-dark);
+}
+
+.btn {
+  extend %remove-underline;
+  @include style-link-text(#eee);
+}
+
+
+```
+
+```css
+/* output css */
+
+a:link,
+.btn {
+  text-decoration: none;
+}
+
+a:link {
+  text-transform: uppercase;
+  color: #1a1a1a;
+}
+.btn {
+  text-transform: uppercase;
+  color: #eee;
 }
 ```
