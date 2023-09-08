@@ -617,3 +617,7 @@ a:link {
   color: #eee;
 }
 ```
+
+## Command Line
+
+- `open xyz.jpg` opens the file in the supported software.
