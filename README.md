@@ -2,22 +2,22 @@
 
 A website development attempt to learn CSS
 
-# Run Locally
+## Run Locally
 
 ```bash
 npm i
 
-# either
+##either
 npm run dev
 
-# or
-# npm run compile:sass
-# npm run live-reload
+##or
+##npm run compile:sass
+##npm run live-reload
 ```
 
-# TakeAways
+## TakeAways
 
-## background image with gradient on top
+### background image with gradient on top
 
 ```css
 background-image: linear-gradient(
@@ -27,7 +27,7 @@ background-image: linear-gradient(
   ), url(../img/hero.jpg);
 ```
 
-## background image adjustment
+### background image adjustment
 
 ```css
 /* background-size;cover covers the container with image */
@@ -36,7 +36,7 @@ background-size: cover;
 background-position: top;
 ```
 
-## make shapes of the background
+### make shapes of the background
 
 ```css
 /* the x and y positions of the sides of the polygon */
@@ -45,7 +45,7 @@ clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
 
 [clippy](https://bennettfeely.com/clippy/) - a small tool to make clip-paths on the go.(not golang, I meant fast & easy)
 
-## center an element in a div - absolutely
+### center an element in a div - absolutely
 
 ```css
 #parent {
@@ -62,13 +62,13 @@ clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
 }
 ```
 
-## center the inline-block elements
+### center the inline-block elements
 
 ```css
 text-align: center;
 ```
 
-## define an animation
+### define an animation
 
 ```css
 @keyframes moveInLeft {
@@ -104,7 +104,7 @@ text-align: center;
 }
 ```
 
-## multiple properties of an animation
+### multiple properties of an animation
 
 ```css
 #el {
@@ -112,11 +112,11 @@ text-align: center;
 }
 ```
 
-# How CSS Works
+## How CSS Works
 
-## **Importance > Specificity > Source Order**
+### **Importance > Specificity > Source Order**
 
-### Importance Order
+#### Importance Order
 
 1. User !important declarations
 2. Author !important declarations
@@ -124,18 +124,18 @@ text-align: center;
 4. User declarations
 5. Default browser declarations
 
-### Specificity Order
+#### Specificity Order
 
 1. Inline styles
 2. IDs
 3. Classes, pseudo-classes, attribute
 4. Elements, pseudo-elements
 
-### Source Order
+#### Source Order
 
 The last declaration in the code will apply if the Importance and specificity of the declaration are the same.
 
-## Key points
+### Key points
 
 - directly targeted elements have higher precedence than inherited styles
 
@@ -172,13 +172,14 @@ The last declaration in the code will apply if the Importance and specificity of
   but the specifiers present inside them do add their own weight to the specificity of the selector.
 
 - :where() pseudo-class makes the specificity of the specifiers within it to be (0-0-0);
+
   ```css
   :where(#id .class div) a ; /* (0-0-0) + (0-0-1) = (0-0-1)
   ```
 
-## Good Practices to declare selectors
+### Good Practices to declare selectors
 
-### with or without adding specificity
+#### with or without adding specificity
 
 ```css
 #myContent h1 {
@@ -208,9 +209,9 @@ The last declaration in the code will apply if the Importance and specificity of
 }
 ```
 
-# How is CSS Parsed?
+## How is CSS Parsed?
 
-## Processing
+### Processing
 
 ```css
 1 rem = 1 \* 16px; /* 16px is browser default font-size of root element */
@@ -224,7 +225,7 @@ The last declaration in the code will apply if the Importance and specificity of
 6. vh: x\*1% of viewport height
 7. vw: x \* 1% of viewport weight
 
-### Key Points -
+#### Key Points -
 
 - each property has initial value, used if nothing is declared (or inherited).
 - Browsers specify a root-font-size for each page(usually 16px).
@@ -236,7 +237,7 @@ The last declaration in the code will apply if the Importance and specificity of
 - **rem** are always measured relative to the **document's root** **font-size**.
 - vh and vw are simply percentage measurements of the viewport height and width respectively.
 
-## Inheritance
+### Inheritance
 
 ```css
 .parent {
@@ -252,7 +253,7 @@ The last declaration in the code will apply if the Importance and specificity of
 }
 ```
 
-### Key Points
+#### Key Points
 
 - Inherited value of line-height of child element is the computed value of parent element(20\*1.5=30px)
 - Inheritance passes the values for some specific properties from parents to children - more maintainable code.
@@ -262,18 +263,18 @@ The last declaration in the code will apply if the Importance and specificity of
 - The **inherit** keyword forces inheritance of a certain property;
 - The **initial** keyword resets a property to its initial value.
 
-# Visual Formatting Model
+## Visual Formatting Model
 
-## Box Model
+### Box Model
 
 - content area width\*height (text content)
 - fill area width \* height + padding (background images, background color)
 
 - `box-sizing: border-box` height and width include the padding of the box
 
-## Box Types
+### Box Types
 
-### Block-level boxes
+#### Block-level boxes
 
 - elements formatted visually as blocks.
 - 100% of parents width.
@@ -286,7 +287,7 @@ display: list-item;
 display: table;
 ```
 
-### Inline boxes
+#### Inline boxes
 
 - Content is distributed in lines.
 - Occupies only content space.
@@ -298,7 +299,7 @@ display: table;
 display: inline;
 ```
 
-### Inline block boxes
+#### Inline block boxes
 
 - A mix of block and inline.
 - Occupies only content space.
@@ -308,9 +309,9 @@ display: inline;
 display: inline-block;
 ```
 
-## Positioning Schemes
+### Positioning Schemes
 
-### Normal Flow
+#### Normal Flow
 
 - default positioning scheme.
 - elements laid out according to their source order.
@@ -321,7 +322,7 @@ position: relative;
  it from its position from normal document flow */
 ```
 
-### Floats
+#### Floats
 
 - Element is removed from normal flow.
 - Text and inline elements will wrap around the floated element.
@@ -332,7 +333,7 @@ float: left;
 float: right;
 ```
 
-### Absolute Positioning
+#### Absolute Positioning
 
 - Element is removed from normal flow
 - No impact on surrounding content or elements.
@@ -343,14 +344,14 @@ position: absolute; /* positions wrt to it's position:relative ancestor */
 position: fixed; /* positions wrt to the viewport of screen regardless of scroll */
 ```
 
-### Stacking Contexts
+#### Stacking Contexts
 
 - z-index creates stacking contexts.
 - also other things like opacity value other than 1, transform , filter and other properties cause stacking context.
 
-# Think Build Architect
+## Think Build Architect
 
-## Think
+### Think
 
 - Clean
 - Modular
@@ -359,16 +360,16 @@ position: fixed; /* positions wrt to the viewport of screen regardless of scroll
 
 layout - naming classes - good folders structure
 
-### Component Driven Design
+#### Component Driven Design
 
 - **Modular building blocks** that make up interfaces.
 - Held together by the **layout** of the page.
 - **Re-usable** across the project, and between different projects.
 - **Independent**, allowing us to use them anywhere on the page.
 
-## Build
+### Build
 
-### B--E\_\_M
+#### B--E\_\_M
 
 - Block Element Modifier
 - BLOCK - standalone component that is meaningful on its own.
@@ -384,7 +385,7 @@ layout - naming classes - good folders structure
 }
 ```
 
-## Architect
+### Architect
 
 The seven folders
 
@@ -396,7 +397,7 @@ The seven folders
 6. abstracts/ _the code which doesn't output any css, variables and mixins_
 7. vendors/ _all the third party css_
 
-# SASS
+## SASS
 
 - **Variables**: for reusable values such as colors, font-sizes, spacing, etc.
 - **Nesting**: to nest selectors inside of one another, allowing us to write less code.
@@ -407,7 +408,7 @@ The seven folders
 - **Extends**: to make different selectors inherit declarations that are common to all of them.
 - **Control Directives**: for writing complex code using conditionals and loops (not covered in this course).
 
-## Making a navbar with SCSS syntax (Sassy CSS);
+### Making a navbar with SCSS syntax (Sassy CSS)
 
 [click here to view the codepen](https://codepen.io/templar-command0/pen/wvRgzwa)
 
@@ -582,9 +583,9 @@ nav::after {
 }
 ```
 
-### Note
+#### Note
 
-**the difference between extend and mixin**
+##### the difference between extend and mixin
 
 ```scss
 // scss
@@ -609,8 +610,6 @@ a:link {
   extend %remove-underline;
   @include style-link-text(#eee);
 }
-
-
 ```
 
 ```css
@@ -631,6 +630,40 @@ a:link {
 }
 ```
 
-## Command Line
+### Command Line
 
 - `open xyz.jpg` opens the file in the supported software.
+
+## BASIC RESPONSIVE DESIGN PRINCIPLES
+
+- FLUID LAYOUTS
+- RESPONSIVE UNITS
+- FLEXIBLE IMAGES
+- MEDIA QUERIES
+
+### FLUID LAYOUTS
+
+- To allow webpage to adapt to the current viewport width (or even height)
+- Use `%`(or vh/vw) unit instead of `px` for elements that should adapt to viewport (usually layout)
+
+- Use `max-width` instead of `width`
+
+## RESPONSIVE UNITS
+
+- Use `rem` unit instead of `px` for most lengths.
+- To make it easy to scale the entire layout down (or up) automatically.
+
+## FLEXIBLE IMAGES
+
+- By default, images don't scale automatically as we change the viewport, so we need to fix that
+- Always use `%` for images dimensions, together with the `max-width` property
+
+## MEDIA QUERIES
+
+- To change CSS styles on certain viewport widths (called breakpoints)
+
+## LAYOUT TYPES
+
+1. Float Layouts
+2. Flexbox
+3. CSS Grid
