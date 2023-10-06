@@ -1,5 +1,6 @@
 .header {
   height: 95vh;
+
   // writing hex code in rgba only works in sass
   background-image: linear-gradient(
       to right bottom,
@@ -11,7 +12,7 @@
   background-position: top;
   position: relative;
 
-  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 
   &__logo-box {
     position: absolute;

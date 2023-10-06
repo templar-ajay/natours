@@ -4,14 +4,15 @@
   "description": "Landing page for Natours",
   "main": "index.js",
   "scripts": {
-    "compile:sass": "node-sass --watch ./sass/main.scss ./css/style.css",
-    "live-reload": "live-server --ignore=*.scss,package.json",
+    "compile:sass": "node-sass ./sass/main.scss ./css/style.css && node-sass ./sass/main.scss ./css/style.css --watch",
+    "live-reload": "live-server --ignore=*.scss,package.json --no-css-inject --port=3003",
     "dev": "concurrently 'npm run compile:sass' 'npm run live-reload'"
   },
   "author": "Ajay",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.1",
+    "live-reload": "^1.1.1",
     "node-sass": "^9.0.0"
   }
 }
